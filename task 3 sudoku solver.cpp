@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-#define N 9  // Sudoku grid size
+#define N 9  
 
-// Function to print the Sudoku board
 void printBoard(int board[N][N]) {
     cout << "\nSolved Sudoku Grid:\n";
     for (int row = 0; row < N; ++row) {
@@ -14,7 +13,6 @@ void printBoard(int board[N][N]) {
     }
 }
 
-// Check if it's safe to place a number in the cell
 bool isSafe(int board[N][N], int row, int col, int num) {
     // Check the row
     for (int x = 0; x < N; ++x) {
@@ -22,13 +20,11 @@ bool isSafe(int board[N][N], int row, int col, int num) {
             return false;
     }
 
-    // Check the column
     for (int x = 0; x < N; ++x) {
         if (board[x][col] == num)
             return false;
     }
 
-    // Check 3x3 subgrid
     int startRow = row - row % 3;
     int startCol = col - col % 3;
     for (int i = 0; i < 3; ++i)
@@ -39,28 +35,26 @@ bool isSafe(int board[N][N], int row, int col, int num) {
     return true;
 }
 
-// Recursive backtracking function to solve Sudoku
 bool solveSudoku(int board[N][N]) {
     for (int row = 0; row < N; ++row) {
         for (int col = 0; col < N; ++col) {
-            if (board[row][col] == 0) { // empty cell
+            if (board[row][col] == 0) { 
                 for (int num = 1; num <= 9; ++num) {
                     if (isSafe(board, row, col, num)) {
                         board[row][col] = num;
                         if (solveSudoku(board))
                             return true;
-                        board[row][col] = 0; // backtrack
+                        board[row][col] = 0; 
                     }
                 }
-                return false; // no valid number found
+                return false; 
             }
         }
     }
-    return true; // all cells filled
+    return true; 
 }
 
 int main() {
-    // 0 means empty cells
     int board[N][N] = {
         {5, 3, 0, 0, 7, 0, 0, 0, 0},
         {6, 0, 0, 1, 9, 5, 0, 0, 0},

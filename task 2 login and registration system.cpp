@@ -2,8 +2,6 @@
 #include <map>
 #include <string>
 using namespace std;
-
-// Simulated database
 map<string, string> userDB;
 
 void registerUser() {

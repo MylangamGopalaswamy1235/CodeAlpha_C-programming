@@ -15,13 +15,12 @@ public:
         type = t;
         amount = amt;
 
-        // Safe method for getting formatted time in C++
         time_t now = time(0);
         char* dt = ctime(&now);
         if (dt) {
             timeStr = string(dt);
             if (!timeStr.empty() && timeStr.back() == '\n') {
-                timeStr.pop_back(); // remove newline
+                timeStr.pop_back(); 
             }
         } else {
             timeStr = "Time error";
@@ -29,7 +28,7 @@ public:
     }
 
     void display() const {
-        cout << type << " of $" << fixed << setprecision(2) << amount << " at " << timeStr << endl;
+        cout << type << " of ₹" << fixed << setprecision(2) << amount << " at " << timeStr << endl;
     }
 };
 
@@ -47,7 +46,7 @@ public:
     void deposit(double amount) {
         balance += amount;
         transactions.push_back(Transaction("Deposit", amount));
-        cout << "Deposited $" << amount << " to Account " << accountNumber << endl;
+        cout << "Deposited ₹" << amount << " to Account " << accountNumber << endl;
     }
 
     bool withdraw(double amount) {
@@ -57,7 +56,7 @@ public:
         }
         balance -= amount;
         transactions.push_back(Transaction("Withdrawal", amount));
-        cout << "Withdrew $" << amount << " from Account " << accountNumber << endl;
+        cout << "Withdrew ₹" << amount << " from Account " << accountNumber << endl;
         return true;
     }
 
